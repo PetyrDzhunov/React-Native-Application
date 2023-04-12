@@ -4,18 +4,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>Hello World!!!</Text>
-      <Text
-        style={{
-          backgroundColor: 'red',
-          color: 'white',
-          margin: 16,
-          borderColor: 'blue',
-          borderWidth: 1,
-          borderRadius: 3,
-        }}
-      >
-        Hello World!
-      </Text>
+      <Text style={styles.dummyText}>Hello World!</Text>
       <Button title="Click me!" />
     </View>
   );
@@ -27,5 +16,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'yellow',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  dummyText: {
+    backgroundColor: 'red',
+    color: 'white',
+    margin: 16,
+    borderColor: 'blue',
+    borderWidth: 1,
+    borderRadius: 3,
   },
 });
