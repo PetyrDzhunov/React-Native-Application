@@ -10,12 +10,16 @@ import {
 
 export default function App() {
   const [enteredGoalText, setEnteredGoalText] = useState('');
+  const [courseGoals, setCourseGoals] = useState<string[]>([]);
   const goalInputHandler = (enteredText: string) => {
     setEnteredGoalText(enteredText);
   };
 
   const addGoalHandler = () => {
-    console.log(enteredGoalText);
+    setCourseGoals((currentCourseGoals) => [
+      ...currentCourseGoals,
+      enteredGoalText,
+    ]);
   };
 
   return (
@@ -34,7 +38,9 @@ export default function App() {
         </TouchableOpacity>
       </View>
       <View style={styles.goalsContainer}>
-        <Text>List of goals...</Text>
+        {courseGoals.map((goal) => (
+          <Text key={goal}>{goal}</Text>
+        ))}
       </View>
     </View>
   );
