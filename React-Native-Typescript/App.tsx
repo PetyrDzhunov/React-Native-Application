@@ -7,11 +7,17 @@ import {
   TouchableOpacity,
   View,
   ScrollView,
+  FlatList,
 } from 'react-native';
+
+interface Goal {
+  text: string;
+  id: string;
+}
 
 export default function App() {
   const [enteredGoalText, setEnteredGoalText] = useState('');
-  const [courseGoals, setCourseGoals] = useState<string[]>([]);
+  const [courseGoals, setCourseGoals] = useState<Goal[]>([]);
   const goalInputHandler = (enteredText: string) => {
     setEnteredGoalText(enteredText);
   };
@@ -19,7 +25,7 @@ export default function App() {
   const addGoalHandler = () => {
     setCourseGoals((currentCourseGoals) => [
       ...currentCourseGoals,
-      enteredGoalText,
+      { text: enteredGoalText, id: Math.random().toString() },
     ]);
   };
 
@@ -39,13 +45,17 @@ export default function App() {
         </TouchableOpacity>
       </View>
       <View style={styles.goalsContainer}>
-        <ScrollView>
-          {courseGoals.map((goal) => (
-            <View style={styles.goalItem} key={goal}>
-              <Text style={styles.goalText}>{goal}</Text>
-            </View>
-          ))}
-        </ScrollView>
+        <FlatList
+          keyExtractor={(item) => item.id}
+          data={courseGoals}
+          renderItem={(itemData) => {
+            return (
+              <View style={styles.goalItem}>
+                <Text style={styles.goalText}>{itemData.item.text}</Text>
+              </View>
+            );
+          }}
+        />
       </View>
     </View>
   );
